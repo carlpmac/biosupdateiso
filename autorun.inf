@@ -1,0 +1,5 @@
+[autorun]
+icon=\FREEDOS\FREEDOS.ICO,0
+label=FreeDOS 1.1 Bootable Bios Updater
+shell\DOCInstall=&View Installation Document
+shell\DOCInstall\command=write \FREEDOS\DOCS\INSTALL3.TXT

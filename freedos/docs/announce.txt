@@ -1,0 +1,86 @@
+We'd like to announce the release of the FreeDOS 1.1 distribution.
+
+What's FreeDOS?
+
+FreeDOS is an opensource operating system aiming to provide the same (or better) functionality as Microsoft's 
+old MS-DOS. Right now the main use is running old games and software, but you might encounter it on some
+freshly sold computers, motherboard setup CDs, BIOS flashing diskettes, embedded hardware and other uses.
+
+While FreeDOS itself is basicly just the DOS-C kernel as created by Pat Villani, over the years many people have
+added programs (often licensed as GPL, other times as freeware, public domain or a custom license) to form a
+distribution so you actually get some additional drivers and programs to run.
+
+
+What's new since 1.0 (2006):
+* FreeDOS kernel 2040 (Bart Oldeman, Jeremy Davis and others. Should fix fat32 file corruption).
+* mtcp (Michael Brutman), a suite of high-performance TCP/IP applications for any x86 computer.
+* an initial attempt at USB controller support (Bret Johnson). So far only UHCI (Intel/Via USB1.1 12Mb/s & 1.5Mb/s),
+  thus no OHCI (Nvidia etc, 12Mbit/s & 1.5Mbit/s, EHCI (USB 2.0 , 480Mbit/s) and UHCI (USB 3.0 , 5000 Mbit/s)
+* generic PCI IDE cache/cdrom driver (Jack R. Ellis) including PIO/UDMA modes for (P)ATA/SATA harddisks and CD.
+* new installation menu when starting from CD, intended to reduce amount of menus you have to respond to.
+* universal BIOS backup program, see http://www.flashrom.org . 
+* updated memory drivers (HMA&XMS, UMB&EMS) with many thanks to Japheth, Jack, Michael Devore and Tom Ehlert
+* 4DOS 8.00 command interpreter has been added, many thanks to Luchezar Georgiev for updating JPSOFT's code
+* installation scripts have been streamlined. Much to do still though.
+* very limited USB flash disk support (often showing up as C: )
+* many new versions of many programs, including DEVLOAD and DEBUG. Features and fixes as usual.
+* ..
+
+Removed:
+* Unstable kernel 2039. Replaced by 2040. No NLS (NLSFUNC/CHCP) support yet, expected in 2041
+* UDMA/GCDROM/QCDROM etc. Replaced by UIDE. For USB bootCD, using ELTORITO from Syslinux 4.05
+
+Installation notes:
+* the FreeDOS 1.1 distribution itself might be stored as a single (ISO9660 CD-image) file on CD.
+* right now the only way to install is to boot the CD, then select bottom option.
+  this loads the entire collection of FreeDOS 1.1 installation files in system memory.
+  Only now you select option 1 (installing FreeDOS).
+* Should you wish to keep things really simple, get a bootdisk and perform the following commands:
+  1) FDISK (to create an active primary partition which should use the FAT16 or FAT32 filesystem)
+  2) FORMAT C: (creates an empty filesystem on C:, also erases all previous software/data)
+  3) SYS C: (writes bootsector to C: and copies kernel and shell)
+  4) Whatever you'd like to do next.
+  
+Installation issues:
+* Initial CD detection code isn't working rightnow. Hardcoded menu to show a CD drive.
+  Undocumented: press "Q" to leave this menu. CD seems to have loaded anyway, often as D:
+  Undocumented: press "U" to update the CD (copy files to ramdisk, 64MB+ systems only)
+* Old installation method hangs somewhere somehow after keyboard selection.
+* The new FreeDOS text installer version 4.01 can be used by typing:
+  X:\SETUP (where X: is your CD drive) followed by a parameter, which can be a nonsense
+  name or a drive/directory containing setup archive files (in YOURDIR\PACKAGES\BASE\).
+  Example: D:\SETUP C:\MYFILES (provided C:\MYFILES\PACKAGES\BASE\*.ZIP exist)
+* due to there being an ISO on the CD, without the Memdisk/ISO method you'll need to boot
+  the small diskette image and/or a bootdisk, then locate the CD, then mount the ISO file
+  before continuing. General commands to do so:
+  SHSUCDHD /F:D:\ISOLINUX\FDBOOTCD.ISO (or whatever your CD drive is, instead of D: )
+  SHSUCDX /D:SHSU-CDH
+  Then switch to the newly added drive and type SETUP
+* You can copy the inner ISO to harddisk or USB flash drive if you like and mount it there
+* Bootdisk menu currently not working  
+* ..
+  
+Limitations:
+* Only the BASE set has been packaged, thus meaning the LiveCD environment is missing completely.
+* If installing from USB flash drive, be careful. Your flash drive might show up as C: ..
+* ..
+
+TODO:
+* adding additional sets
+* adding useful programs
+* creating disksets
+* fixing bootdisks
+* ..
+
+Useful sites:
+* (FreeDOS)         : http://www.freedos.org                                  (FreeDOS news/software)
+* (Rugxulo)         : http://sites.google.com/site/rugxulo/                   (continuous updates over the years)
+* (Blair Campbell)  : http://sites.google.com/site/blairdude/                 (ports, software, distro)
+* (Jeremy Davis)    : http://www.fdos.org / http://wiki.fdos.info             (additional FreeDOS info)
+* (Eric Auer)       : http://ericauer.cosmodata.virtuaserver.com.br/soft/specials/ (many small program)
+* (Mateusz Viste)   : http://www.viste-family.net/mateusz/dos/en/download.htm (FDupdate program, update packaging)
+* (Udo / Florian)   : http://www.drdos.org , http://www.drdos.net             (Extensive DOS Wiki, covering a lot)
+* ..
+
+Bernd Blaauw,
+2011-12-31

@@ -1,0 +1,6 @@
+base: Y
+boot: n
+gui: n
+net: n
+util: Y
+
